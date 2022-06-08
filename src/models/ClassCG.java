@@ -1,9 +1,10 @@
 package models;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ClassCG {
+public class ClassCG implements Serializable {
     private String name;
     private Date createDay;
     private String course;

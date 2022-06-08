@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class ManagerStudent {
-    ReaderAndWrite readerAndWrite = new ReaderAndWrite();
+    ReaderAndWrite<Student> readerAndWrite = new ReaderAndWrite();
     ArrayList<Student> students = new ArrayList<>();
     ArrayList<ClassCG> classCGs = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
@@ -17,14 +17,16 @@ public class ManagerStudent {
     public ManagerStudent() {
         classCGs.add(new ClassCG("C0322g1", new Date("22/2/2222"), "Java", 28));
         classCGs.add(new ClassCG("C0322g2", new Date("1/1/2022"), "PHP", 20));
-        students = readerAndWrite.reader(classCGs);
+        students = readerAndWrite.reader("student2.txt");
     }
 
-    public void menu() {
+    public void menuAdmin() {
+        System.out.println("Hello " + ManagerAccount.account.getUserName() + " ok ok");
         System.out.println("Menu");
         System.out.println("1. Thêm học viên");
         System.out.println("2. Hiển thị học viên");
         System.out.println("3. Hiển thị học viên theo class");
+        System.out.println("4. Logout");
         int choice = Integer.parseInt(scanner.nextLine());
         switch (choice) {
             case 1:
@@ -35,6 +37,30 @@ public class ManagerStudent {
                 break;
             case 3:
                 findAllByClass();
+                break;
+            case 4:
+                ManagerAccount.account = null;
+                break;
+        }
+    }
+
+    public void menuUser() {
+        System.out.println("Hello " + ManagerAccount.account.getUserName() + " ok ok");
+        System.out.println("Menu");
+        System.out.println("1. Hiển thị học viên");
+        System.out.println("2. Hiển thị học viên theo class");
+        System.out.println("3. Logout");
+
+        int choice = Integer.parseInt(scanner.nextLine());
+        switch (choice) {
+            case 1:
+                showAll();
+                break;
+            case 2:
+                findAllByClass();
+                break;
+            case 3:
+                ManagerAccount.account = null;
                 break;
         }
     }
@@ -56,7 +82,7 @@ public class ManagerStudent {
         int choice = Integer.parseInt(scanner.nextLine());
         Student student = new Student(name, age, phone, address, classCGs.get(choice - 1));
         students.add(student);
-        readerAndWrite.write(students);
+        readerAndWrite.write(students, "student2.txt");
     }
 
     public void showAll() {
