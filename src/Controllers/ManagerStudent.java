@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class ManagerStudent {
     ReaderAndWrite<Student> readerAndWrite = new ReaderAndWrite();
-    ArrayList<Student> students = new ArrayList<>();
+    public ArrayList<Student> students = new ArrayList<>();
     ArrayList<ClassCG> classCGs = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 

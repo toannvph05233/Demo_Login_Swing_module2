@@ -19,26 +19,8 @@ public class ManagerAccount {
         }
     }
 
-    public void menuLogin() {
-        System.out.println("1. Đăng nhập");
-        System.out.println("2. Đăng ký");
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                login();
-                break;
-            case 2:
-                register();
-                break;
-        }
-    }
 
-    public boolean login() {
-        System.out.println("Nhập userName :");
-        String user = scanner.nextLine();
-        System.out.println("Nhập passWord :");
-        String pass = scanner.nextLine();
-
+    public boolean login(String user, String pass) {
         for (Account acc : accounts) {
             if (acc.getUserName().equals(user) && acc.getPass().equals(pass)) {
                 ManagerAccount.account = acc;
@@ -48,22 +30,13 @@ public class ManagerAccount {
         return false;
     }
 
-    public void register() {
-        String user = null;
-        while (true) {
-            System.out.println("Nhập userName :");
-            user = scanner.nextLine();
-            if (checkUserName(user)) {
-                break;
-            }else {
-                System.err.println("trùng userName");
-            }
+    public void register(String user, String pass) {
+        if (!checkUserName(user)) {
+            System.err.println("trùng userName");
+            return;
         }
-        System.out.println("Nhập passWord :");
-        String pass = scanner.nextLine();
         accounts.add(new Account(user, pass, "user"));
-
-        readerAndWrite.write(accounts,"account.txt");
+        readerAndWrite.write(accounts, "account.txt");
     }
 
     public boolean checkUserName(String userName) {
